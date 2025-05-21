@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+          box-sizing: border-box;
+        }
+        body {
+          font-family: 'Arial', sans-serif;
+          margin: 0;
+          padding: 0;
+          background: #fdf6e3;
+          transition: background 0.5s;
+          overflow-x: hidden;
+        }
+        .love {
+          position: fixed;
+          top: -10px;
+          color: pink;
+          font-size: 24px;
+          animation: fall 5s linear infinite;
+          opacity: 0.8;
+        }
+        @keyframes fall {
+          0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+          100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+        .menu {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 100vh;
+          padding: 20px;
+          text-align: center;
+        }
+        .menu a {
+          margin: 10px;
+          padding: 15px 30px;
+          background: #ffb6b9;
+          text-decoration: none;
+          color: #000;
+          border-radius: 10px;
+          font-weight: bold;
+          animation: slideIn 1s ease forwards;
+          transition: background 0.3s;
+        }
+        .menu a:hover {
+          background: #ffa1a4;
+        }
+        @keyframes slideIn {
+          from { transform: translateX(-200px); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        .halaman {
+          display: none;
+          padding: 20px;
+          animation: fadeIn 1s ease;
+          min-height: 100vh;
+          text-align: center;
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        .active {
+          display: block;
+        }
+        .animated-text {
+          animation: floatText 3s ease-in-out infinite;
+        }
+        @keyframes floatText {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        figure {
+          max-width: 300px;
+          width: 100%;
+          margin: 20px auto;
+          display: block;
+          border-radius: 15px;
+          animation: pulse 2s infinite;
+        }
+        figure img {
+          width: 100%;
+          max-width: 150px;
+          border-radius: 15px;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        figure figcaption {
+          margin-top: 10px;
+          font-style: italic;
+          color: #0e0d0d;
+        }
+        @keyframes pulse {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+          100% { transform: scale(1); }
+        }
+        audio {
+          width: 80%;
+          margin: 10px 0;
+        }
+        .back-button {
+          display: inline-block;
+          margin-top: 20px;
+          padding: 10px 20px;
+          background: pink;
+          color: #000;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: bold;
+          transition: background 0.3s;
+          animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-8px); }
+        }
+        @media (max-width: 600px) {
+          .menu a {
+            width: 100%;
+            font-size: 1.2em;
+          }
+        }
+        .photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 kolom */
+  gap: 16px;
+  padding: 10px;
+}
+
+.fun-frame {
+  border: 4px dashed #ff69b4;
+  border-radius: 15px;
+  padding: 10px;
+  text-align: center;
+  background-color: #fff0f5;
+  box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.fun-frame:hover {
+  transform: scale(1.05);
+}
+
+.fun-frame img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+.fun-frame figcaption {
+  margin-top: 8px;
+  font-size: 0.95em;
+  color: #d63384;
+  font-style: italic;
+}
+
+      </style>
+</head>
+<body>
+    <audio id="clickSound" src="click.mp3" preload="auto"></audio>
+
+  <!-- Love animation elements -->
+  <script>
+    function createLove() {
+      const love = document.createElement("div");
+      love.classList.add("love");
+      love.textContent = "❤";
+      love.style.left = Math.random() * window.innerWidth + "px";
+      love.style.fontSize = Math.random() * 20 + 20 + "px";
+      document.body.appendChild(love);
+      setTimeout(() => love.remove(), 5000);
+    }
+    setInterval(createLove, 300);
+  </script>
+
+  <div class="menu" id="menu">
+    <a href="#" onclick="playSound(); showPage('halaman1')">Halaman 1</a>
+    <a href="#" onclick="playSound(); showPage('halaman2')">Halaman 2</a>
+    <a href="#" onclick="playSound(); showPage('halaman3')">Halaman 3</a>
+    <a href="#" onclick="playSound(); showPage('halaman4')">Halaman 4</a>
+  </div>
+
+  <div class="halaman" id="halaman1">
+    <h1 class="animated-text">🎉 Barakallahu Fil Umrik ya Bii! 🎂</h1>
+    <p>Semoga harimu penuh kebahagiaan dan cinta.</p>
+    <figure>
+      <img src="kue.jpg" alt="Kue Ulang Tahun">
+      <figcaption>Kue spesial untukmu!</figcaption>
+    </figure>
+    <a href="#" class="back-button" onclick="playSound(); backToMenu()">🔙💕</a>
+  </div>
+
+  <div class="halaman" id="halaman2">
+    <h2 class="animated-text">Haiiii <br><span class="emoji">❤️</span>Nabiul Ibad<span class="emoji">❤️</span></h2>
+    <P>
+      🎉 Selamat ulang tahun ya... Semoga semua mimpi dan harapanmu pelan-pelan jadi nyata.
+       Aku percaya banget, masa depan yang indah udah nungguin kamu—karena kamu memang istimewa.
+       Tetap jadi diri sendiri, tapi jangan berhenti berkembang. Aku tahu kamu bisa 💫<span class="emoji">🎈</span>
+    </p>
+    <p>
+       Di hari spesial ini 🎂, aku doakan semoga kamu selalu sehat, bahagia, dan dimudahkan dalam setiap langkah.
+       Semoga kamu selalu dikelilingi orang-orang baik—termasuk aku dong, pastinya 😅—dan diberi kekuatan lebih untuk menghadapi apapun yang datang nanti.😎<span class="emoji">🎉</span>
+    </p>
+    <p>
+       Terima kasih ya, udah jadi kamu yang luar biasa. Jangan pernah ragu sama diri sendiri. Kamu punya sesuatu yang dunia ini butuh.
+       Dan aku bangga kenal kamu 🥰
+    </p>
+    <P>Tapi... boleh aku nitip pesan kecil?</P>
+    <P>
+       Jangan lupa sholat ya. Aku tahu kadang rasanya sibuk, capek, atau pengen rebahan terus.
+       Tapi yang bikin kamu kuat bukan cuma kopi atau tidur larut malam, tapi juga doa. Jangan sampai HP kamu lebih sering kamu buka daripada mushaf atau sajadah.
+    </p>
+    <p>
+       Dan kalau jam 2 pagi kamu masih online, aku mulai mikir... jangan-jangan kamu beneran kelelawar reinkarnasi 🤔😆 Tapi aku ngomong gini bukan karena cerewet—aku peduli.
+       Karena kalau kamu sampai jatuh sakit, siapa lagi yang bisa aku ganggu tiap hari?
+    </p>
+    <p>
+       Jadi, sholatnya jangan ditunda, dan tidurnya cukup ya.
+       Kamu berharga, jangan lelah jadi versi terbaik dari dirimu sendiri. Aku dukung kamu, sepenuh hati. 💛</P>
+    <a href="#" class="back-button" onclick="playSound(); backToMenu()">🔙💕</a>
+  </div>
+
+  <div class="halaman" id="halaman3">
+    <h2 class="animated-text">Kenangan Manis</h2>
+    <figure>
+      <img src="foto 2.jpg" alt="Foto Kita">
+    </figure>
+
+    <audio controls>
+      <source src="Denny Caknan Sinarengan Feat Bella Bonita.mp3" type="audio/mpeg">
+      Browser kamu tidak mendukung audio.
+    </audio>
+    <audio controls>
+      <source src="Nadhif Basalamah - bergema sampai selamanya (Official Lyric Video).mp3">
+      Browser kamu tidak mendukung audio.
+    </audio>
+    <p>
+     Haiii... selamat ulang tahun yaaa! 🎉🎂✨
+     Hari ini kamu resmi bertambah umur, tapi tenang aja... kamu masih lebih muda dari dinosaurus kok 🦕😜 Jadi nggak usah panik dulu yaa~ hehehe 😆
+    </p>
+    <p>
+     Makasih udah lahir ke dunia ini... dan yang paling penting, makasih udah muncul di dunia aku juga 😚💛
+     Sejak kamu datang, semuanya kerasa beda—lebih rame, lebih seru, lebih hangat, dan pastinya... lebih berwarna 🎨🌈
+    </p>
+    <p>
+     Aku doain semoga di usia baru ini, kamu makin sukses 💼💪 makin sehat 💊💤 makin sabar 😇 (terutama sabar ngadepin aku yang kadang dramaaa banget 😅🙈), dan makin ganteng! 😍 Walaupun aku tahu, itu udah mentok di level maksimal sih 😘🔥
+    </p>
+    <p>
+     Tapi... ada yang mau aku omongin juga...
+    </p>
+    <p>
+     Maaf ya... kalau selama ini aku suka banyak maunya 😔
+     Kadang aku ngatur ini itu 📝, nuntut tanpa mikir kamu capek atau nggak 😞
+     Aku sadar, kadang cara aku sayang ke kamu malah bikin kamu ngerasa tertekan 😢
+     Tapi beneran, aku lakuin itu semua karena aku peduli... karena aku sayang banget sama kamu 💕
+     Aku cuma belum sepenuhnya ngerti cara nunjukinnya dengan baik 😞🙏
+    </p>
+    <p>
+     Tapi makasih ya...
+     Makasih udah bertahan, udah sabar, udah ngerti aku, dan masih mau tetap ada buat aku 🥺💖
+     Aku bangga banget punya kamu... dan bersyukur tiap hari karena kamu itu nyata, bukan cuma khayalan 😭🌟
+    </p>
+    <p>
+     Dan terakhir...
+     Jangan lupa traktir ya! 😋🍕🍧
+     Kan aku ini hadiah ulang tahun paling langka, paling berharga, dan paling nggak bisa ditukar di mana-mana 😎🎁✨  
+    </p>
+    <a href="#" class="back-button" onclick="playSound(); backToMenu()"> 🔙💕</a>
+  </div>
+  <div class="halaman" id="halaman4">
+  <h2 class="animated-text">Happy Birthday! 🎂</h2>
+
+  <div class="photo-grid">
+    <figure class="fun-frame">
+      <img src="foto 3.jpg" alt="Foto 2">
+    </figure>
+    <figure class="fun-frame">
+      <img src="foto 4.jpg" alt="Foto 3">
+    </figure>
+    <figure class="fun-frame">
+      <img src="foto 5.jpg" alt="Foto 4">
+    </figure>
+    <figure class="fun-frame">
+      <img src="foto.jpg" alt="Foto 5">
+    </figure>
+  </div>
+
+  <p>\(^_^)/  (\^o^/)</p>
+  <a href="#" class="back-button" onclick="playSound(); backToMenu()">🔙💕</a>
+</div>
+
+  <script>
+    function showPage(id) {
+      document.getElementById("menu").style.display = 'none';
+      document.querySelectorAll('.halaman').forEach(h => h.classList.remove('active'));
+      const selectedPage = document.getElementById(id);
+      selectedPage.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function backToMenu() {
+      document.querySelectorAll('.halaman').forEach(h => h.classList.remove('active'));
+      document.getElementById("menu").style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function playSound() {
+      const sound = document.getElementById("clickSound");
+      if (sound) {
+        sound.currentTime = 0;
+        sound.play();
+      }
+    }
+  </script>
+    
+</body>
+</html>
